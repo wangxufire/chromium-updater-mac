@@ -6,7 +6,7 @@ import urllib.request, urllib.error, urllib.parse, os.path, sys
 
 LAST_REVISION_URL = 'https://commondatastorage.googleapis.com/chromium-browser-snapshots/Mac/LAST_CHANGE'
 DOWNLOAD_URL = 'https://commondatastorage.googleapis.com/chromium-browser-snapshots/Mac%2F{}%2Fchrome-mac.zip?alt=media'
-DOWNLOAD_PATH = '/tmp/Chromium/'
+DOWNLOAD_PATH = os.path.expanduser('~/.chromium_updater/')
 
 def latest_revision():
 	return urllib.request.urlopen(LAST_REVISION_URL).read().decode()
@@ -14,7 +14,7 @@ def latest_revision():
 def install():
 	print('Extracting files ...')
 	os.system('unzip -q chrome-mac.zip')
-	print('Removing old files.)
+	print('Removing old files.')
 	os.system('rm -rf /Applications/Chromium.app')
 	print('Installing files.')
 	os.system('cp -r chrome-mac/ /Applications/')
