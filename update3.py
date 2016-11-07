@@ -14,12 +14,12 @@ def latest_revision():
 def install():
 	print('Extracting files ...')
 	os.system('unzip -q chrome-mac.zip')
-	print('Removing old files. You might be asked to enter your password.')
+	print('Removing old files.)
 	os.system('rm -rf /Applications/Chromium.app')
-	print('Installing files. You might be asked to enter your password.')
-	os.system('cp -a chrome-mac/ /Applications/')
+	print('Installing files.')
+	os.system('cp -r chrome-mac/ /Applications/')
 	print('Removing old files ...')
-	os.system('rm -rf chrome-mac')
+	os.system('rm -rf chrome-mac*')
 	print('All done!')
 
 def update():
