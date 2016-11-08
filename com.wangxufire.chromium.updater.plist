@@ -7,10 +7,8 @@
   <key>ProgramArguments</key>
     <array>
       <string>/usr/local/bin/python3</string>  
-      <string>~/.chromium-updater-mac/update3.py</string>  
+      <string>~/Workspace/github/chromium-updater-mac/update3.py</string>  
     </array>
-  <key>KeepAlive</key>
-  <true/>
   <key>StartCalendarInterval</key>  
   <dict>  
     <key>Hour</key>  
@@ -19,8 +17,8 @@
     <integer>0</integer>  
   </dict>  
   <key>StandardOutPath</key>  
-  <string>/tmp/Chromium/update.log</string>  
+  <string>~/.chromium_updater/update.log</string>  
   <key>StandardErrorPath</key>  
-  <string>/tmp/Chromium/update_error.log</string>  
+  <string>~/.chromium_updater/update_error.log</string>  
 </dict>  
 </plist> 
