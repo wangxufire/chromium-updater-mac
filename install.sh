@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -e 
+# set -e 
 
 plist_path="$HOME/.chromium-updater-mac/com.wangxufire.chromium.updater.plist"
-plist_filename=$(basename "$plist_path")
+plist_filename=$(basename $plist_path)
 install_path="$HOME/Library/LaunchAgents/$plist_filename"
 
 sed -i "" "s|~|$HOME|g" $plist_path

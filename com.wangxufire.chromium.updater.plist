@@ -7,7 +7,7 @@
   <key>ProgramArguments</key>
     <array>
       <string>/usr/local/bin/python3</string>  
-      <string>~/Workspace/github/chromium-updater-mac/update3.py</string>  
+      <string>~/.chromium-updater-mac/update3.py</string>  
     </array>
   <key>StartCalendarInterval</key>  
   <dict>  
