@@ -2,7 +2,11 @@
 # Chromium Updater
 # Download and install the newest Chromium build from http://chromium.org on Mac OS X.
 
-import urllib.request, urllib.error, urllib.parse, os.path, sys
+import os.path
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
 
 LAST_REVISION_URL = 'https://commondatastorage.googleapis.com/chromium-browser-snapshots/Mac/LAST_CHANGE'
 DOWNLOAD_URL = 'https://commondatastorage.googleapis.com/chromium-browser-snapshots/Mac%2F{}%2Fchrome-mac.zip?alt=media'
@@ -43,9 +47,9 @@ def update():
 	os.system(command)
 	install()
 	print('Upgraded to revision %s' % (revision))
+	os.system('killall Chromium')
 	os.system('open -a /Applications/Chromium.app --args --vmodule=google_api_keys=1')
 	sys.exit()
 
 if __name__ == '__main__':
 	update()
-
