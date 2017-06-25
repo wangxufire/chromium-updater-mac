@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">  
-<plist version="1.0">  
-<dict>  
-  <key>Label</key>  
-  <string>com.wangxufire.chromium.updater</string>  
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.wangxufire.chromium.updater</string>
   <key>ProgramArguments</key>
     <array>
-      <string>/usr/local/bin/python3</string>  
-      <string>~/.chromium-updater-mac/update3.py</string>  
+      <string>/usr/local/bin/python3</string>
+      <string>~/.chromium-updater-mac/update3.py</string>
     </array>
-  <key>StartCalendarInterval</key>  
-  <dict>  
-    <key>Hour</key>  
-    <integer>12</integer> 
-    <key>Minute</key>  
-    <integer>0</integer>  
-  </dict>  
-  <key>StandardOutPath</key>  
-  <string>~/.chromium_updater/update.log</string>  
-  <key>StandardErrorPath</key>  
-  <string>~/.chromium_updater/update_error.log</string>  
-</dict>  
-</plist> 
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>11</integer>
+    <key>Minute</key>
+    <integer>30</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>~/.chromium_updater/update.log</string>
+  <key>StandardErrorPath</key>
+  <string>~/.chromium_updater/update_error.log</string>
+</dict>
+</plist>
