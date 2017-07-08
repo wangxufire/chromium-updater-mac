@@ -2,7 +2,7 @@
 
 ## Usage
 
-ensure python3 installed in /usr/local/bin/python3
+ensure python3 is installed in /usr/local/bin/python3
 
 ```bash
 git clone https://github.com/wangxufire/chromium-updater-mac.git ~/.chromium-updater-mac

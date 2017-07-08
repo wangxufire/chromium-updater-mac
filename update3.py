@@ -31,7 +31,9 @@ def latest_revision():
 
 def install():
     print('Extracting files ...')
-    os.system('unzip -q chrome-mac.zip')
+    if os.system('unzip -q chrome-mac.zip') != 0:
+        print('Failed to update maybe the zip file not download success.')
+        sys.exit(1)
     print('Removing old files.')
     os.system('rm -rf /Applications/Chromium.app')
     print('Installing files.')
@@ -51,7 +53,7 @@ def update():
 
     if os.path.exists(local_download_path):
         print('Already have latest version')
-        sys.exit()
+        sys.exit(0)
 
     os.mkdir(local_download_path)
     os.chdir(local_download_path)
@@ -75,7 +77,7 @@ def update():
                     progress.refresh(count=len(data))
     except:
         traceback.print_exc()
-        sys.exit()
+        sys.exit(1)
 
     install()
     print('Upgraded to revision %s' % (revision))
@@ -83,7 +85,7 @@ def update():
     os.system(
         'open -a /Applications/Chromium.app --args --vmodule=google_api_keys=1'
     )
-    sys.exit()
+    sys.exit(0)
 
 
 """
