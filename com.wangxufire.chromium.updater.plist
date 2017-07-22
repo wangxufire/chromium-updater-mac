@@ -6,7 +6,7 @@
   <string>com.wangxufire.chromium.updater</string>
   <key>ProgramArguments</key>
     <array>
-      <string>python</string>
+      <string>/usr/bin/python</string>
       <string>~/.chromium-updater-mac/chromium_update.py</string>
     </array>
   <key>StartCalendarInterval</key>

@@ -14,7 +14,7 @@ echo "installing launchctl plist: $plist_path --> $install_path"
 cp -f "$plist_path" "$install_path"
 
 launchctl unload "$install_path"
-launchctl load -w "$install_path"
+launchctl load -w -F "$install_path"
 
 echo "to check if it's running, run this command: launchctl list | grep chromium.updater"
 echo "to uninstall, run this command: launchctl unload $install_path"

@@ -79,7 +79,7 @@ def update():
                 total=content_size,
                 unit='KB',
                 chunk_size=chunk_size,
-                run_status=to_str("正在下载"),
+                run_status=to_str('正在下载'),
                 fin_status=to_str('下载完成'))
             with open('./chrome-mac.zip', "wb") as file:
                 for data in response.iter_content(chunk_size=chunk_size):
@@ -115,7 +115,7 @@ class ProgressBar(object):
                  sep='/',
                  chunk_size=1.0):
         super(ProgressBar, self).__init__()
-        self.info = "[%s] %s %.2f %s %s %.2f %s"
+        self.info = '[%s] %s %.2f %s %s %.2f %s'
         self.title = title
         self.total = total
         self.count = count
@@ -134,7 +134,7 @@ class ProgressBar(object):
     def refresh(self, count=1, status=None):
         self.count += count
         self.status = status or self.status
-        end_str = "\r"
+        end_str = '\r'
         if self.count >= self.total:
             end_str = '\n'
             self.status = status or self.fin_status
