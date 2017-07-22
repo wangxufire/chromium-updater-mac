@@ -2,6 +2,8 @@
 
 # set -e
 
+pip install -U request
+
 plist_path="$HOME/.chromium-updater-mac/com.wangxufire.chromium.updater.plist"
 plist_filename=$(basename "$plist_path")
 install_path="$HOME/Library/LaunchAgents/$plist_filename"

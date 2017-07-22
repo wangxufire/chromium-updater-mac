@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """
 Chromium Updater
 Download and install the newest Chromium build
 from http://chromium.org on Mac OS X.
 """
 
+from __future__ import absolute_import, division, print_function, \
+    with_statement
+
+import logging
 import os.path
+import requests
 import sys
 import traceback
-import urllib.error
-import urllib.parse
-import urllib.request
 from contextlib import closing
 
-import requests
 
 LAST_REVISION_URL = 'https://commondatastorage.googleapis.com/\
 chromium-browser-snapshots/Mac/LAST_CHANGE'
@@ -25,52 +28,59 @@ DOWNLOAD_PATH = os.path.expanduser('~/.chromium_updater/')
 
 
 def latest_revision():
-    print('Looking for latest revision from %s...' % (LAST_REVISION_URL))
-    return urllib.request.urlopen(LAST_REVISION_URL).read().decode()
+    logging.info('Looking for latest revision from %s...' %
+                 (LAST_REVISION_URL))
+    return requests.get(LAST_REVISION_URL).text
 
 
 def install():
-    print('Extracting files ...')
+    logging.debug('Extracting files ...')
     if os.system('unzip -q chrome-mac.zip') != 0:
-        print('Failed to update maybe the zip file not download success.')
+        logging.error(
+            'Failed to update maybe the zip file not download success.')
         sys.exit(1)
-    print('Removing old files.')
+    logging.debug('Removing old files.')
     os.system('rm -rf /Applications/Chromium.app')
-    print('Installing files.')
+    logging.debug('Installing files.')
     os.system('cp -r chrome-mac/ /Applications/')
-    print('Removing old files ...')
+    logging.debug('Removing old files ...')
     os.system('rm -rf chrome-mac*')
-    print('All done!')
+    logging.info('All done!')
 
 
 def update():
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S')
+
     revision = latest_revision()
-    print('Latest revision is %s.' % (revision))
+    logging.info('Latest revision is %s.' % (revision))
     local_download_path = DOWNLOAD_PATH + revision
 
     if not os.path.exists(DOWNLOAD_PATH):
         os.mkdir(DOWNLOAD_PATH)
 
     if os.path.exists(local_download_path):
-        print('Already have latest version')
+        logging.info('Already have latest version')
         sys.exit(0)
 
     os.mkdir(local_download_path)
     os.chdir(local_download_path)
     download_url = DOWNLOAD_URL.format(revision)
-    print('Starting download chromium from: %s' % (download_url))
+    logging.debug('Starting download chromium from: %s' % (download_url))
 
     try:
         with closing(requests.get(download_url, stream=True)) as response:
             chunk_size = 1024
             content_size = int(response.headers['content-length'])
             progress = ProgressBar(
-                "progressing",
+                'progressing',
                 total=content_size,
-                unit="KB",
+                unit='KB',
                 chunk_size=chunk_size,
-                run_status="正在下载",
-                fin_status="下载完成")
+                run_status=to_str("正在下载"),
+                fin_status=to_str('下载完成'))
             with open('./chrome-mac.zip', "wb") as file:
                 for data in response.iter_content(chunk_size=chunk_size):
                     file.write(data)
@@ -80,7 +90,7 @@ def update():
         sys.exit(1)
 
     install()
-    print('Upgraded to revision %s' % (revision))
+    logging.info('Upgraded to revision %s' % (revision))
     os.system('killall Chromium')
     os.system(
         'open -a /Applications/Chromium.app --args --vmodule=google_api_keys=1'
@@ -110,8 +120,8 @@ class ProgressBar(object):
         self.total = total
         self.count = count
         self.chunk_size = chunk_size
-        self.status = run_status or ""
-        self.fin_status = fin_status or " " * len(self.status)
+        self.status = run_status or b''
+        self.fin_status = fin_status or b' ' * len(self.status)
         self.unit = unit
         self.seq = sep
 
@@ -129,6 +139,13 @@ class ProgressBar(object):
             end_str = '\n'
             self.status = status or self.fin_status
         print(self.__get_info(), end=end_str)
+
+
+def to_str(s):
+    if bytes != str:
+        if type(s) == bytes:
+            return s.decode('utf-8')
+    return s
 
 
 if __name__ == '__main__':
