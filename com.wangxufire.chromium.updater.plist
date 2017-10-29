@@ -5,10 +5,12 @@
   <key>Label</key>
   <string>com.wangxufire.chromium.updater</string>
   <key>ProgramArguments</key>
-    <array>
-      <string>/usr/local/bin/python</string>
-      <string>~/.chromium-updater-mac/chromium_update.py</string>
-    </array>
+  <array>
+    <string>/usr/local/bin/python3</string>
+    <string>~/.chromium-updater-mac/chromium_update.py</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
   <key>StartCalendarInterval</key>
   <dict>
     <key>Hour</key>
@@ -19,6 +21,6 @@
   <key>StandardOutPath</key>
   <string>~/.chromium_updater/update.log</string>
   <key>StandardErrorPath</key>
-  <string>~/.chromium_updater/update_error.log</string>
+  <string>~/.chromium_updater/update.log</string>
 </dict>
 </plist>
